@@ -48,119 +48,26 @@ cam = cv2.VideoCapture(0)
 
 
 
-# Category dictionary
-#word_dict = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F'}
 
 while(cam.isOpened()):
-    #Get frame
     
     ret, frame = cam.read()
     frame=cv2.flip(frame,1)
-
-   
-    
-    # Show frame
     if cv2.waitKey(1)&0xFF == ord('-'):
         break
- 
-      # Coordinates of the ROI
     x1 = int(0.5*frame.shape[1])
     y1 = 10
     x2 = frame.shape[1]-10
     y2 = int(0.5*frame.shape[1])
-    # Drawing the ROI
-    # The increment/decrement by 1 is to compensate for the bounding box
     cv2.rectangle(frame, (x1-1, y1-1), (x2+1, y2+1), (255,0,0) ,1)
-    # Extracting the ROI
     roi = frame[y1:y2, x1:x2]
-
-    
-    
-
-
-    
-
-    # Resizing the ROI so it can be fed to the model for prediction
-    #roi = cv2.resize(roi, (64,64)) 
-    
-    #print(roi[1])
-    #print("this is roi",len(roi))
-
-    #test_image = cv2.threshold(roi, 120, 255, cv2.THRESH_BINARY)
-    #cv2.imshow("test", test_image)
-    #print(type(test_image))
-    #print(test_image)
-    #print("this is test image",len(test_image))
-    #print("this is test_image",test_image)
-    #Batch of 1
-
-
-    #path='data/test'
-
-    
-    
-    #resut=cv2.imread(path,cv2.IMREAD_COLOR)
-    #image='test1/data1'
-    #result = loaded_model.predict(image.reshape( 1,64,64,3))
-    #print(test_image.reshape(1,85,85,9))
-    
-    #prediction = {'A': result[0][0], 
-                #  'B': result[0][1], 
-                #  'C': result[0][2],
-                #  'D': result[0][3],
-                #  'E': result[0][4],
-                #  'F': result[0][5]}
-
-    #loaded_model.predict(frame,batch_size=1)   
-
-    #x=image.resize(310,310)  
-
-    #loaded_model.predict(x, batch_size=None, verbose=0, steps=None, callbacks=None)     
-                  
-    # Sorting based on top prediction
-    #prediction = sorted(prediction.items(), key=operator.itemgetter(1), reverse=True)
-    
-    # Displaying the predictions
-    #cv2.putText(frame, prediction[0][0], (10, 120), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1) 
-   
-    
-
-
-   
     cv2.imshow("Frame", frame)
-
     minvalue=20
- 
-    
-    
-    
-    # do the processing after capturing the image!
     roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-
-    #blur=cv2.GaussianBlur(roi,(5,5),2)
-
-
     _, roi = cv2.threshold(roi, 120, 255, cv2.THRESH_BINARY)
-    
-
-    #th3=cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,11,2)
-    #ret,test_image=cv2.threshold(th3,minvalue,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
-
-    #converted = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV
-
-    #median = cv2.GaussianBlur(roi, (5, 5), 0)
-    #print(roi)
-
-
-
-
     cv2.imshow("sign detection", roi)
-
     mode='train1'
     directory='data1/'+mode+'/'
- 
-    #getting count
-    
     count={
         'a':len(os.listdir(directory+"/A")),
         'b':len(os.listdir(directory+"/B")),
@@ -190,21 +97,6 @@ while(cam.isOpened()):
         'z':len(os.listdir(directory+"/Z")),
         
     }
-
-    #printing count
-   # cv2.putText(frame, "Image count : "+str(count), (10, 100), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "a : "+str(count['a']), (10, 100), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "b : "+str(count['b']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "c : "+str(count['c']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "d : "+str(count['d']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "e : "+str(count['e']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "f : "+str(count['f']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "g : "+str(count['g']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "h : "+str(count['h']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "i : "+str(count['i']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    #cv2.putText(frame, "j : "+str(count['j']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-
-
     interrupt=cv2.waitKey(10)
     if interrupt & 0xFF==27:
         break
@@ -260,15 +152,8 @@ while(cam.isOpened()):
         cv2.imwrite(directory+'Y/'+str(count['y'])+'.jpg', roi)
     if interrupt & 0xFF == ord('z'):
         cv2.imwrite(directory+'Z/'+str(count['z'])+'.jpg', roi)
-    
-
-    
-   
     mode='test1'
     directory='data1/'+mode+'/'
- 
-    #getting count
-    
     count={
         'A':len(os.listdir(directory+"/A")),
         'B':len(os.listdir(directory+"/B")),
@@ -354,11 +239,5 @@ while(cam.isOpened()):
         cv2.imwrite(directory+'Y/'+str(count['Y'])+'.jpg', roi)
     if interrupt & 0xFF == ord('z'):
         cv2.imwrite(directory+'Z/'+str(count['Z'])+'.jpg', roi)
-    
-
-   
-    
- 
-
 cam.release()
 cv2.destroyAllWindows()
