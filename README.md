@@ -21,7 +21,7 @@ This project aims to develop a system that converts sign language gestures into 
 
 1. Clone this repository to your local machine:
 
-git clone https://github.com/ashvtosh/Major-Project-1.git
+  git clone https://github.com/ashvtosh/Major-Project-1.git
 
 2. Install dependencies using pip
 
@@ -37,7 +37,3 @@ git clone https://github.com/ashvtosh/Major-Project-1.git
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute to this project, please fork the repository, create a new branch, make your changes, and submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
