@@ -1,4 +1,43 @@
-# Sign-to-text-conversion-using-openCV
-Hello, This repository contains python implementation for recognising American Sign Language (ASL) gestures. As there is less research, there is no standard dataset avialable in the web. So, we decided to create my own dataset of gesture images. ASL dataset have all alphabets (A-Z) with total classes = 26. Each class has 1200 images.  
-We are developing a system that uses our computer’s webcam to capture our hand gestures for American Sign Language (ASL), and translate it into corresponding text. We will not be using glove or any external hardware for our system, our model can recognize gestures made by bare hands. This system uses a set of representations which are finger sign, expression or mixture of both to precise their information among others. The system proposed in this project aims at tackling the problem of requirement of interpreter to some extent by recognizing sign language and converting it to text. Input given to the system is an image of the hand depicting the necessary alphabet. Our system uses deep learning techniques. One such technique is Convolutional Neural Network (CNN) for image depiction and classification. Our system uses OpenCV for the real time computer vision. The main aim behind our project is to develop a system which provides communication between people with speech disabilities and normal people. Our system is able to 
-recognize 26 American Sign Language (ASL) alphabets.
+# Sign Language to Text Conversion
+
+## Overview
+
+This project aims to develop a system that converts sign language gestures into text. It utilizes computer vision techniques to detect and recognize sign language gestures captured via a camera. The converted text can then be used for various applications such as communication aids for individuals with hearing impairments or for real-time translation.
+
+## Features
+
+- Real-time sign language gesture recognition.
+- Conversion of recognized gestures into text.
+- Support for multiple sign languages.
+
+## Dependencies
+
+- Python 3.x
+- OpenCV
+- TensorFlow
+- Other dependencies
+
+## Installation
+
+1. Clone this repository to your local machine:
+
+git clone https://github.com/ashvtosh/Major-Project-1.git
+
+2. Install dependencies using pip
+
+
+## Usage
+
+1. Run the main script:
+
+2. Point your camera towards the sign language gestures you want to convert.
+
+3. The recognized text will be displayed on the screen.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to this project, please fork the repository, create a new branch, make your changes, and submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
